@@ -29,16 +29,9 @@
 
 ## Constitution Check
 
-*GATE: 必须在 Phase 0 研究之前通过，并在 Phase 1 设计后复查。*
+*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-- P1 简单可维护优先：本特性是否引入了可以接受的复杂度？
-  - 若增加了新项目 / 新服务 / 复杂模式，是否已在 “Complexity Tracking” 中记录 Violation？
-- P2 最小可行测试基线：每个 P1 用户故事是否已有至少一种可重复验证方式
-  （优先自动化测试，其次为在 spec/quickstart 中记录的手工步骤）？
-- P3 单人节奏的开发工作流：本 feature 的工作量是否适合单人在 1–3 天内完成，
-  且不会破坏主分支可运行性？
-- P4 性能与资源使用基线：是否需要在 `Success Criteria` 中声明性能目标或输入规模假设？
-- P5 可观测性与错误处理：是否为关键路径定义了至少一种可用的日志 / 返回码 / 状态观测方式？
+[Gates determined based on constitution file]
 
 ## Project Structure
 

@@ -8,9 +8,7 @@ description: "Task list template for feature implementation"
 **Input**: Design documents from `/specs/[###-feature-name]/`
 **Prerequisites**: plan.md (required), spec.md (required for user stories), research.md, data-model.md, contracts/
 
-**Tests**: 根据宪章「最小可行测试基线」，P1 用户故事至少需要一种可重复的验证方式
-（优先自动化测试，其次为在 spec/quickstart 中记录的手工步骤）。下面的测试任务仅为示例，
-实际是否编写自动化测试由 feature 规格和时间成本共同决定，但必须在 plan/spec 中明确记录选择。
+**Tests**: The examples below include test tasks. Tests are OPTIONAL - only include them if explicitly requested in the feature specification.
 
 **Organization**: Tasks are grouped by user story to enable independent implementation and testing of each story.
 
