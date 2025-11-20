@@ -2,6 +2,10 @@
 
 Auto-generated from all feature plans. Last updated: [DATE]
 
+**Constitution Stage**: S1 · MVP (minimal executable). All guidelines MUST remain
+consistent with the Core Principles and S1 quality gates defined in
+`.specify/memory/constitution.md`.
+
 ## Active Technologies
 
 [EXTRACTED FROM ALL PLAN.MD FILES]

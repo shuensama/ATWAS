@@ -8,7 +8,10 @@ description: "Task list template for feature implementation"
 **Input**: Design documents from `/specs/[###-feature-name]/`
 **Prerequisites**: plan.md (required), spec.md (required for user stories), research.md, data-model.md, contracts/
 
-**Tests**: The examples below include test tasks. Tests are OPTIONAL - only include them if explicitly requested in the feature specification.
+**Tests**: The examples below include test tasks. Contract/unit tests are OPTIONAL at S1 (MVP)
+unless the feature specification or constitution explicitly requires them. However, at least
+one P1 smoke test for the main flow is REQUIRED by the constitution; ensure there is a task
+to create and maintain `scripts/smoke/p1.*`.
 
 **Organization**: Tasks are grouped by user story to enable independent implementation and testing of each story.
 
@@ -48,7 +51,8 @@ description: "Task list template for feature implementation"
 
 **Purpose**: Project initialization and basic structure
 
-- [ ] T001 Create project structure per implementation plan
+- [ ] T001 Create project structure per implementation plan, including `CHANGELOG.md`,
+      `quickstart.md`, `scripts/smoke/p1.*`, and `.env.example` stubs
 - [ ] T002 Initialize [language] project with [framework] dependencies
 - [ ] T003 [P] Configure linting and formatting tools
 
@@ -66,8 +70,10 @@ Examples of foundational tasks (adjust based on your project):
 - [ ] T005 [P] Implement authentication/authorization framework
 - [ ] T006 [P] Setup API routing and middleware structure
 - [ ] T007 Create base models/entities that all stories depend on
-- [ ] T008 Configure error handling and logging infrastructure
-- [ ] T009 Setup environment configuration management
+- [ ] T008 Configure error handling and structured logging infrastructure
+      (levels + correlation IDs)
+- [ ] T009 Setup environment configuration management with a single configuration
+      source (for example, `.env` + loader)
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 

@@ -31,7 +31,23 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+At the current **S1 · MVP** stage, this section MUST explicitly evaluate the following
+gates from `.specify/memory/constitution.md` and either confirm compliance or record
+justified violations in **Complexity Tracking**:
+
+- **P1 smoke path**: P1 user story identified and mapped to a `scripts/smoke/p1.*` command.
+- **Code quality**: formatter and static analysis tools selected and planned to run in CI
+  as blocking checks for errors.
+- **Configuration & secrets**: a single configuration source is defined; `.env.example` is
+  planned or updated; no real secrets are committed.
+- **Logging & error handling**: structured logging and actionable error handling are planned
+  along the P1 path.
+- **Performance baseline**: a simple performance budget and a plan to record at least one
+  baseline run for the P1 path.
+- **Release & onboarding**: `quickstart.md` and `CHANGELOG.md` are planned or updated to
+  reflect this feature.
+- **Levers**: `team.size`, `risk.level`, `surface`, `release.criticality`, `compliance`
+  are chosen for this feature according to `constitution-plan.md`.
 
 ## Project Structure
 
