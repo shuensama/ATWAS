@@ -1,0 +1,33 @@
+﻿# ATWAS Development Guidelines
+
+Auto-generated from all feature plans. Last updated: 2025-11-27
+
+**Constitution Stage**: S1 · MVP (minimal executable). All guidelines MUST remain
+consistent with the Core Principles and S1 quality gates defined in
+`.specify/memory/constitution.md`.
+
+## Active Technologies
+
+- TypeScript + JavaScript (Node.js 20, Next.js 14 App Router) + Next.js 14 (React 18, App Router), Tailwind CSS, shadcn/ui, Prisma ORM, PostgreSQL, auth.js (NextAuth v5 风格), Zod, Axios/Fetch API (001-ai-drama-stage)
+
+## Project Structure
+
+```text
+src/
+tests/
+```
+
+## Commands
+
+npm test; npm run lint
+
+## Code Style
+
+TypeScript + JavaScript (Node.js 20, Next.js 14 App Router): Follow standard conventions
+
+## Recent Changes
+
+- 001-ai-drama-stage: Added TypeScript + JavaScript (Node.js 20, Next.js 14 App Router) + Next.js 14 (React 18, App Router), Tailwind CSS, shadcn/ui, Prisma ORM, PostgreSQL, auth.js (NextAuth v5 风格), Zod, Axios/Fetch API
+
+<!-- MANUAL ADDITIONS START -->
+<!-- MANUAL ADDITIONS END -->
