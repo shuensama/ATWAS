@@ -210,7 +210,7 @@ DramaSession 内的单轮发言单元。
 
 - **FR-004 / FR-005 / FR-006 / FR-007 / FR-008 / FR-009**：  
   - `SceneTemplate` / `RoleTemplate` 字段设计支撑模板保存、搜索/筛选、编辑、删除与快速预览；  
-  - 角色/场景的快照字段（`sceneSnapshot/roleSnapshot`）保障在会话中使用的 prompt 与启动时确认内容一致，并可导出。  
+  - 角色/场景的快照字段（`sceneSnapshot/roleSnapshot`）保障在会话中实际使用的设定与启动时确认的配置一致，并为在新演出中基于模板或历史会话配置做高效复用提供结构化基础，同时为需要时的一键复制导出提供数据来源。  
 
 - **FR-011 / FR-012 / FR-013**：  
   - `DramaSession` + `Turn` 的持久化设计支持完整历史保存与详情回看；  

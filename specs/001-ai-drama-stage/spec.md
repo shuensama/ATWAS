@@ -82,8 +82,8 @@
 - **FR-005**: System MUST allow users to save a 角色 prompt as a 可复用「角色模板」，包括：名称、角色背景简介、说话/行为风格说明、可选标签和头像/图标。
 - **FR-006**: System MUST provide an AI-assisted flow to generate a new 角色模板：用户通过自然语言描述需求，系统生成一份结构化的角色 prompt 建议文本，用户可在确认前自由编辑后再保存为模板。
 - **FR-007**: System MUST provide list, search and filter capabilities for both 场景模板 and 角色模板，至少支持按名称关键字、标签、最近使用排序进行筛选，并可在列表中快速预览主要内容。
-- **FR-008**: System MUST ensure that when a user starts a new 演出，会话中实际使用的场景和角色 prompt 内容与用户在启动前确认的配置一致，并在界面中以可查看的形式呈现当前会话所用的全部 prompt。
-- **FR-009**: System MUST allow users to复制/导出当前演出所使用的场景 prompt 与各角色 prompt（例如一键复制到剪贴板），以便用户在其他地方复用或备份。
+- **FR-008**: System MUST ensure that when a user starts a new 演出，会话中实际使用的场景和角色设定来自用户在启动前确认的配置：包括基于所选场景/角色模板生成的场次级快照，并在界面中以可查看的形式呈现当前会话所用的全部场景与角色设定。
+- **FR-009**: System MUST support efficient reuse of existing 场景 prompt 与角色 prompt when creating a new 演出：允许用户从已保存的场景模板与角色模板中选取并预填当前会话配置（以及可选地从某一历史演出复制其配置为新会话起点），同时 SHOULD 提供一键复制当前会话所用场景与角色 prompt 的能力，以便在其他工具中复用或备份。
 - **FR-010**: System MUST implement basic safety constraints for generated content（例如对明显违规或不适宜内容进行拦截或弱化处理），并在必要时向用户展示友好的提示说明原因。
 - **FR-011**: System MUST persist the full conversation content of each DramaSession（包含所有 Turn 对话轮次），并提供「历史演出详情」视图，使用户可以按轮次回看任意一场已完成的演出。
 - **FR-012**: System MUST allow users to resume an in-progress DramaSession after closing or refreshing the page, by restoring its configuration and all previously generated Turns, and continuing to generate subsequent Turns from the last saved state using the stateless AI model.
