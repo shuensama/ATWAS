@@ -1,6 +1,10 @@
 ---
 description: Generate an interaction-flow and low-fidelity prototype design from the current feature specification.
 handoffs: 
+  - label: Generate HTML Prototype
+    agent: speckit.prototype
+    prompt: Generate an HTML+Tailwind prototype from the interaction design and spec.
+    send: true
   - label: Build Technical Plan
     agent: speckit.plan
     prompt: Create a technical plan that respects both the spec and the interaction design. I am building with...
