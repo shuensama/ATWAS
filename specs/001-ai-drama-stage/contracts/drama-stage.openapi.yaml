@@ -55,7 +55,7 @@ paths:
             type: string
             enum: [lastUsedAt_desc, createdAt_desc, title_asc]
       responses:
-        '200':
+        "200":
           description: 模板列表
           content:
             application/json:
@@ -65,9 +65,9 @@ paths:
                   items:
                     type: array
                     items:
-                      $ref: '#/components/schemas/SceneTemplate'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
+                      $ref: "#/components/schemas/SceneTemplate"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
 
     post:
       tags: [Templates]
@@ -77,18 +77,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SceneTemplateCreateInput'
+              $ref: "#/components/schemas/SceneTemplateCreateInput"
       responses:
-        '201':
+        "201":
           description: 创建成功
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SceneTemplate'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
+                $ref: "#/components/schemas/SceneTemplate"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
 
   /api/drama/templates/scenes/{id}:
     get:
@@ -101,14 +101,14 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: 模板详情
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SceneTemplate'
-        '404':
-          $ref: '#/components/responses/NotFound'
+                $ref: "#/components/schemas/SceneTemplate"
+        "404":
+          $ref: "#/components/responses/NotFound"
 
     patch:
       tags: [Templates]
@@ -118,28 +118,28 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SceneTemplateUpdateInput'
+              $ref: "#/components/schemas/SceneTemplateUpdateInput"
       responses:
-        '200':
+        "200":
           description: 更新后的模板
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SceneTemplate'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
+                $ref: "#/components/schemas/SceneTemplate"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
 
     delete:
       tags: [Templates]
       summary: 删除场景模板
       description: 删除后不影响已经完成的历史演出记录（对应 FR-004, FR-054）。
       responses:
-        '204':
+        "204":
           description: 删除成功（无内容返回）
-        '404':
-          $ref: '#/components/responses/NotFound'
+        "404":
+          $ref: "#/components/responses/NotFound"
 
   /api/drama/templates/roles:
     get:
@@ -163,7 +163,7 @@ paths:
             type: string
             enum: [lastUsedAt_desc, createdAt_desc, name_asc]
       responses:
-        '200':
+        "200":
           description: 角色模板列表
           content:
             application/json:
@@ -173,7 +173,7 @@ paths:
                   items:
                     type: array
                     items:
-                      $ref: '#/components/schemas/RoleTemplate'
+                      $ref: "#/components/schemas/RoleTemplate"
 
     post:
       tags: [Templates]
@@ -183,14 +183,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RoleTemplateCreateInput'
+              $ref: "#/components/schemas/RoleTemplateCreateInput"
       responses:
-        '201':
+        "201":
           description: 创建成功
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RoleTemplate'
+                $ref: "#/components/schemas/RoleTemplate"
 
   /api/drama/templates/roles/{id}:
     get:
@@ -203,14 +203,14 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: 模板详情
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RoleTemplate'
-        '404':
-          $ref: '#/components/responses/NotFound'
+                $ref: "#/components/schemas/RoleTemplate"
+        "404":
+          $ref: "#/components/responses/NotFound"
 
     patch:
       tags: [Templates]
@@ -220,25 +220,25 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RoleTemplateUpdateInput'
+              $ref: "#/components/schemas/RoleTemplateUpdateInput"
       responses:
-        '200':
+        "200":
           description: 更新后的模板
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RoleTemplate'
-        '404':
-          $ref: '#/components/responses/NotFound'
+                $ref: "#/components/schemas/RoleTemplate"
+        "404":
+          $ref: "#/components/responses/NotFound"
 
     delete:
       tags: [Templates]
       summary: 删除角色模板
       responses:
-        '204':
+        "204":
           description: 删除成功
-        '404':
-          $ref: '#/components/responses/NotFound'
+        "404":
+          $ref: "#/components/responses/NotFound"
 
   /api/drama/templates/roles/ai-generate:
     post:
@@ -257,14 +257,14 @@ paths:
                   description: 用户对想要角色的描述（职业、性格、说话风格等）
                   minLength: 5
       responses:
-        '200':
+        "200":
           description: 生成的角色设定草稿
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RoleDraft'
-        '400':
-          $ref: '#/components/responses/BadRequest'
+                $ref: "#/components/schemas/RoleDraft"
+        "400":
+          $ref: "#/components/responses/BadRequest"
 
   /api/drama/sessions:
     get:
@@ -290,7 +290,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: 会话列表
           content:
             application/json:
@@ -300,7 +300,7 @@ paths:
                   items:
                     type: array
                     items:
-                      $ref: '#/components/schemas/DramaSessionSummary'
+                      $ref: "#/components/schemas/DramaSessionSummary"
                   nextCursor:
                     type: string
                     nullable: true
@@ -314,16 +314,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateSessionInput'
+              $ref: "#/components/schemas/CreateSessionInput"
       responses:
-        '201':
+        "201":
           description: 创建成功
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DramaSession'
-        '400':
-          $ref: '#/components/responses/BadRequest'
+                $ref: "#/components/schemas/DramaSession"
+        "400":
+          $ref: "#/components/responses/BadRequest"
 
   /api/drama/sessions/{sessionId}:
     get:
@@ -336,24 +336,24 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: 会话详情（含当前配置与状态）
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DramaSession'
-        '404':
-          $ref: '#/components/responses/NotFound'
+                $ref: "#/components/schemas/DramaSession"
+        "404":
+          $ref: "#/components/responses/NotFound"
 
     delete:
       tags: [Sessions]
       summary: 删除情景剧会话记录
       description: 对应 FR-013 中的删除历史演出记录能力。
       responses:
-        '204':
+        "204":
           description: 删除成功
-        '404':
-          $ref: '#/components/responses/NotFound'
+        "404":
+          $ref: "#/components/responses/NotFound"
 
   /api/drama/sessions/{sessionId}/control:
     post:
@@ -377,16 +377,16 @@ paths:
                   type: string
                   enum: [start, pause, resume, next, end]
       responses:
-        '200':
+        "200":
           description: 控制成功后返回最新会话状态
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DramaSession'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
+                $ref: "#/components/schemas/DramaSession"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
 
   /api/drama/sessions/{sessionId}/turns:
     get:
@@ -400,7 +400,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: 指定会话的全部轮次
           content:
             application/json:
@@ -408,13 +408,13 @@ paths:
                 type: object
                 properties:
                   session:
-                    $ref: '#/components/schemas/DramaSessionSummary'
+                    $ref: "#/components/schemas/DramaSessionSummary"
                   turns:
                     type: array
                     items:
-                      $ref: '#/components/schemas/Turn'
-        '404':
-          $ref: '#/components/responses/NotFound'
+                      $ref: "#/components/schemas/Turn"
+        "404":
+          $ref: "#/components/responses/NotFound"
 
     post:
       tags: [Sessions]
@@ -430,16 +430,16 @@ paths:
           schema:
             type: string
       responses:
-        '201':
+        "201":
           description: 新生成的 Turn
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Turn'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
+                $ref: "#/components/schemas/Turn"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
 
 components:
   securitySchemes:
@@ -638,11 +638,11 @@ components:
         configMaxRoles:
           type: integer
         sceneSnapshot:
-          $ref: '#/components/schemas/SceneSnapshot'
+          $ref: "#/components/schemas/SceneSnapshot"
         roles:
           type: array
           items:
-            $ref: '#/components/schemas/SessionRole'
+            $ref: "#/components/schemas/SessionRole"
         createdAt:
           type: string
           format: date-time
@@ -750,20 +750,18 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse'
+            $ref: "#/components/schemas/ErrorResponse"
 
     Unauthorized:
       description: 未认证或会话失效
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse'
+            $ref: "#/components/schemas/ErrorResponse"
 
     NotFound:
       description: 资源不存在
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse'
-
-
+            $ref: "#/components/schemas/ErrorResponse"

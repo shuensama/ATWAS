@@ -1,506 +1,947 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI 情景剧舞台 - Prototype</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .chat-bubble::before {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 0;
-            border: 10px solid transparent;
-            border-right-color: #f3f4f6; /* gray-100 */
-            left: -20px;
-            top: 10px;
-        }
-        .chat-bubble-right::before {
-            left: auto;
-            right: -20px;
-            border-right-color: transparent;
-            border-left-color: #dbeafe; /* blue-100 */
-        }
+      .chat-bubble::before {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        border: 10px solid transparent;
+        border-right-color: #f3f4f6; /* gray-100 */
+        left: -20px;
+        top: 10px;
+      }
+      .chat-bubble-right::before {
+        left: auto;
+        right: -20px;
+        border-right-color: transparent;
+        border-left-color: #dbeafe; /* blue-100 */
+      }
     </style>
-</head>
-<body class="bg-gray-100 font-sans text-gray-800 h-screen flex flex-col overflow-hidden">
-
+  </head>
+  <body
+    class="bg-gray-100 font-sans text-gray-800 h-screen flex flex-col overflow-hidden"
+  >
     <!-- Navigation Bar -->
     <nav class="bg-white shadow-sm border-b border-gray-200 flex-none">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex">
-                    <div class="flex-shrink-0 flex items-center">
-                        <span class="text-xl font-bold text-indigo-600">AI Drama Stage</span>
-                        <span class="ml-2 text-xs text-gray-500 bg-gray-200 px-2 py-1 rounded">Prototype</span>
-                    </div>
-                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                        <a href="#" onclick="showScreen('S1')" class="nav-link text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-indigo-500 text-sm font-medium">创建/演出</a>
-                        <a href="#" onclick="showScreen('S3')" class="nav-link text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">我的库</a>
-                        <a href="#" onclick="showScreen('S4')" class="nav-link text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">历史演出</a>
-                    </div>
-                </div>
-                <div class="flex items-center">
-                    <button class="bg-gray-100 p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none">
-                        <span class="sr-only">View notifications</span>
-                        <!-- Heroicon name: outline/bell -->
-                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                        </svg>
-                    </button>
-                    <div class="ml-3 relative flex items-center gap-2">
-                        <div class="h-8 w-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold">U</div>
-                        <span class="text-sm font-medium text-gray-700">User</span>
-                    </div>
-                </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <div class="flex">
+            <div class="flex-shrink-0 flex items-center">
+              <span class="text-xl font-bold text-indigo-600"
+                >AI Drama Stage</span
+              >
+              <span
+                class="ml-2 text-xs text-gray-500 bg-gray-200 px-2 py-1 rounded"
+                >Prototype</span
+              >
             </div>
+            <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+              <a
+                href="#"
+                onclick="showScreen('S1')"
+                class="nav-link text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-indigo-500 text-sm font-medium"
+                >创建/演出</a
+              >
+              <a
+                href="#"
+                onclick="showScreen('S3')"
+                class="nav-link text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium"
+                >我的库</a
+              >
+              <a
+                href="#"
+                onclick="showScreen('S4')"
+                class="nav-link text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium"
+                >历史演出</a
+              >
+            </div>
+          </div>
+          <div class="flex items-center">
+            <button
+              class="bg-gray-100 p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none"
+            >
+              <span class="sr-only">View notifications</span>
+              <!-- Heroicon name: outline/bell -->
+              <svg
+                class="h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                />
+              </svg>
+            </button>
+            <div class="ml-3 relative flex items-center gap-2">
+              <div
+                class="h-8 w-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold"
+              >
+                U
+              </div>
+              <span class="text-sm font-medium text-gray-700">User</span>
+            </div>
+          </div>
         </div>
+      </div>
     </nav>
 
     <!-- Main Content Area -->
     <main class="flex-1 overflow-hidden relative">
+      <!-- S1: 情景剧创建与演出主界面 -->
+      <section id="screen-S1" class="screen h-full flex flex-col sm:flex-row">
+        <!-- Left Panel: Configuration -->
+        <div
+          class="w-full sm:w-1/3 lg:w-1/4 bg-white border-r border-gray-200 overflow-y-auto p-4 flex flex-col gap-6"
+        >
+          <!-- Scene Config -->
+          <div class="card border border-gray-200 rounded-lg p-4 bg-gray-50">
+            <div class="flex justify-between items-center mb-3">
+              <h3
+                class="text-sm font-bold text-gray-700 uppercase tracking-wider"
+              >
+                场景 (Scene)
+              </h3>
+              <button
+                onclick="alert('打开最近使用/收藏列表 (Mock)')"
+                class="text-xs text-indigo-600 hover:text-indigo-800"
+              >
+                从库选择
+              </button>
+            </div>
+            <div class="space-y-3">
+              <div>
+                <label class="block text-xs font-medium text-gray-500"
+                  >场景名称</label
+                >
+                <input
+                  type="text"
+                  value="深夜食堂"
+                  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border p-2"
+                  placeholder="输入场景名称"
+                />
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-gray-500"
+                  >场景 Prompt</label
+                >
+                <textarea
+                  rows="3"
+                  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border p-2"
+                  placeholder="描述场景背景、氛围..."
+                >
+在这个只有深夜才营业的小食堂里，每个人都带着自己的故事...</textarea
+                >
+              </div>
+            </div>
+          </div>
 
-        <!-- S1: 情景剧创建与演出主界面 -->
-        <section id="screen-S1" class="screen h-full flex flex-col sm:flex-row">
-            <!-- Left Panel: Configuration -->
-            <div class="w-full sm:w-1/3 lg:w-1/4 bg-white border-r border-gray-200 overflow-y-auto p-4 flex flex-col gap-6">
-                
-                <!-- Scene Config -->
-                <div class="card border border-gray-200 rounded-lg p-4 bg-gray-50">
-                    <div class="flex justify-between items-center mb-3">
-                        <h3 class="text-sm font-bold text-gray-700 uppercase tracking-wider">场景 (Scene)</h3>
-                        <button onclick="alert('打开最近使用/收藏列表 (Mock)')" class="text-xs text-indigo-600 hover:text-indigo-800">从库选择</button>
+          <!-- Roles Config -->
+          <div
+            class="card border border-gray-200 rounded-lg p-4 bg-gray-50 flex-1 flex flex-col"
+          >
+            <div class="flex justify-between items-center mb-3">
+              <h3
+                class="text-sm font-bold text-gray-700 uppercase tracking-wider"
+              >
+                演员 (Actors)
+              </h3>
+              <span class="text-xs text-gray-500">2-6人</span>
+            </div>
+            <div id="role-list" class="space-y-2 flex-1 overflow-y-auto mb-4">
+              <!-- Role Item 1 -->
+              <div
+                class="flex items-center justify-between bg-white p-2 rounded border border-gray-200 shadow-sm"
+              >
+                <div class="flex items-center gap-2">
+                  <div
+                    class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-xs text-blue-600 font-bold"
+                  >
+                    老板
+                  </div>
+                  <div>
+                    <div class="text-sm font-medium">老板</div>
+                    <div class="text-xs text-gray-400 truncate w-24">
+                      沉默寡言，手艺好
                     </div>
-                    <div class="space-y-3">
-                        <div>
-                            <label class="block text-xs font-medium text-gray-500">场景名称</label>
-                            <input type="text" value="深夜食堂" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border p-2" placeholder="输入场景名称">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-medium text-gray-500">场景 Prompt</label>
-                            <textarea rows="3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border p-2" placeholder="描述场景背景、氛围...">在这个只有深夜才营业的小食堂里，每个人都带着自己的故事...</textarea>
-                        </div>
-                    </div>
+                  </div>
                 </div>
-
-                <!-- Roles Config -->
-                <div class="card border border-gray-200 rounded-lg p-4 bg-gray-50 flex-1 flex flex-col">
-                    <div class="flex justify-between items-center mb-3">
-                        <h3 class="text-sm font-bold text-gray-700 uppercase tracking-wider">演员 (Actors)</h3>
-                        <span class="text-xs text-gray-500">2-6人</span>
-                    </div>
-                    <div id="role-list" class="space-y-2 flex-1 overflow-y-auto mb-4">
-                        <!-- Role Item 1 -->
-                        <div class="flex items-center justify-between bg-white p-2 rounded border border-gray-200 shadow-sm">
-                            <div class="flex items-center gap-2">
-                                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-xs text-blue-600 font-bold">老板</div>
-                                <div>
-                                    <div class="text-sm font-medium">老板</div>
-                                    <div class="text-xs text-gray-400 truncate w-24">沉默寡言，手艺好</div>
-                                </div>
-                            </div>
-                            <button class="text-gray-400 hover:text-red-500">&times;</button>
-                        </div>
-                        <!-- Role Item 2 -->
-                        <div class="flex items-center justify-between bg-white p-2 rounded border border-gray-200 shadow-sm">
-                            <div class="flex items-center gap-2">
-                                <div class="w-8 h-8 rounded-full bg-pink-100 flex items-center justify-center text-xs text-pink-600 font-bold">食客</div>
-                                <div>
-                                    <div class="text-sm font-medium">失恋女</div>
-                                    <div class="text-xs text-gray-400 truncate w-24">刚失恋，借酒消愁</div>
-                                </div>
-                            </div>
-                            <button class="text-gray-400 hover:text-red-500">&times;</button>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-2 mt-auto">
-                        <button onclick="showScreen('S2')" class="flex justify-center items-center px-3 py-2 border border-transparent shadow-sm text-xs font-medium rounded text-white bg-indigo-600 hover:bg-indigo-700">
-                             AI 生成角色
-                        </button>
-                        <button onclick="alert('添加空白角色')" class="flex justify-center items-center px-3 py-2 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50">
-                             + 添加角色
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Session Settings -->
-                <div class="card border border-gray-200 rounded-lg p-4 bg-gray-50">
-                     <h3 class="text-sm font-bold text-gray-700 uppercase tracking-wider mb-3">设置 (Settings)</h3>
-                     <div class="flex items-center justify-between">
-                         <label class="text-sm text-gray-600">总轮数 (Rounds)</label>
-                         <input type="number" value="5" min="1" max="20" class="w-16 border border-gray-300 rounded p-1 text-right">
-                     </div>
-                     <p class="text-xs text-gray-400 mt-1">推荐不超过 20 轮</p>
-                </div>
-                
-                <!-- Start Button -->
-                <button id="btn-start-show" onclick="startShow()" class="w-full py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                    开始演出 (Start Show)
+                <button class="text-gray-400 hover:text-red-500">
+                  &times;
                 </button>
+              </div>
+              <!-- Role Item 2 -->
+              <div
+                class="flex items-center justify-between bg-white p-2 rounded border border-gray-200 shadow-sm"
+              >
+                <div class="flex items-center gap-2">
+                  <div
+                    class="w-8 h-8 rounded-full bg-pink-100 flex items-center justify-center text-xs text-pink-600 font-bold"
+                  >
+                    食客
+                  </div>
+                  <div>
+                    <div class="text-sm font-medium">失恋女</div>
+                    <div class="text-xs text-gray-400 truncate w-24">
+                      刚失恋，借酒消愁
+                    </div>
+                  </div>
+                </div>
+                <button class="text-gray-400 hover:text-red-500">
+                  &times;
+                </button>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-2 mt-auto">
+              <button
+                onclick="showScreen('S2')"
+                class="flex justify-center items-center px-3 py-2 border border-transparent shadow-sm text-xs font-medium rounded text-white bg-indigo-600 hover:bg-indigo-700"
+              >
+                AI 生成角色
+              </button>
+              <button
+                onclick="alert('添加空白角色')"
+                class="flex justify-center items-center px-3 py-2 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50"
+              >
+                + 添加角色
+              </button>
+            </div>
+          </div>
 
+          <!-- Session Settings -->
+          <div class="card border border-gray-200 rounded-lg p-4 bg-gray-50">
+            <h3
+              class="text-sm font-bold text-gray-700 uppercase tracking-wider mb-3"
+            >
+              设置 (Settings)
+            </h3>
+            <div class="flex items-center justify-between">
+              <label class="text-sm text-gray-600">总轮数 (Rounds)</label>
+              <input
+                type="number"
+                value="5"
+                min="1"
+                max="20"
+                class="w-16 border border-gray-300 rounded p-1 text-right"
+              />
+            </div>
+            <p class="text-xs text-gray-400 mt-1">推荐不超过 20 轮</p>
+          </div>
+
+          <!-- Start Button -->
+          <button
+            id="btn-start-show"
+            onclick="startShow()"
+            class="w-full py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+          >
+            开始演出 (Start Show)
+          </button>
+        </div>
+
+        <!-- Right Panel: Stage / Timeline -->
+        <div class="flex-1 flex flex-col bg-gray-100 relative">
+          <!-- Empty State -->
+          <div
+            id="stage-empty"
+            class="absolute inset-0 flex flex-col items-center justify-center text-gray-400"
+          >
+            <svg
+              class="w-16 h-16 mb-4 opacity-50"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+              ></path>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
+            </svg>
+            <p class="text-lg font-medium">舞台已就绪</p>
+            <p class="text-sm">配置场景与角色，点击左侧「开始演出」</p>
+          </div>
+
+          <!-- Dialogue Area -->
+          <div
+            id="stage-content"
+            class="flex-1 overflow-y-auto p-6 space-y-6 hidden"
+          >
+            <!-- Header Info -->
+            <div class="text-center border-b border-gray-200 pb-4 mb-4">
+              <h2 class="text-xl font-bold text-gray-800">深夜食堂 - 演出中</h2>
+              <p class="text-sm text-gray-500">
+                进行中 • 第 <span id="current-round-display">0</span>/5 轮
+              </p>
             </div>
 
-            <!-- Right Panel: Stage / Timeline -->
-            <div class="flex-1 flex flex-col bg-gray-100 relative">
-                
-                <!-- Empty State -->
-                <div id="stage-empty" class="absolute inset-0 flex flex-col items-center justify-center text-gray-400">
-                    <svg class="w-16 h-16 mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    <p class="text-lg font-medium">舞台已就绪</p>
-                    <p class="text-sm">配置场景与角色，点击左侧「开始演出」</p>
-                </div>
-
-                <!-- Dialogue Area -->
-                <div id="stage-content" class="flex-1 overflow-y-auto p-6 space-y-6 hidden">
-                    <!-- Header Info -->
-                    <div class="text-center border-b border-gray-200 pb-4 mb-4">
-                        <h2 class="text-xl font-bold text-gray-800">深夜食堂 - 演出中</h2>
-                        <p class="text-sm text-gray-500">进行中 • 第 <span id="current-round-display">0</span>/5 轮</p>
-                    </div>
-                    
-                    <!-- Dynamic Chat Content -->
-                    <div id="chat-stream" class="space-y-6 max-w-3xl mx-auto">
-                        <!-- Bubbles will be injected here -->
-                    </div>
-                </div>
-
-                <!-- Playback Controls -->
-                <div id="stage-controls" class="bg-white border-t border-gray-200 p-4 flex items-center justify-center gap-4 hidden">
-                     <button onclick="alert('暂停')" class="p-2 rounded-full hover:bg-gray-100 text-gray-600" title="暂停">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                     </button>
-                     <button id="btn-next-turn" onclick="nextTurn()" class="px-6 py-2 bg-indigo-600 text-white rounded-full shadow hover:bg-indigo-700 font-medium flex items-center gap-2">
-                        <span>下一轮 (Next Turn)</span>
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path></svg>
-                     </button>
-                     <button onclick="endShow()" class="p-2 rounded-full hover:bg-red-50 text-red-600" title="结束演出">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                     </button>
-                </div>
+            <!-- Dynamic Chat Content -->
+            <div id="chat-stream" class="space-y-6 max-w-3xl mx-auto">
+              <!-- Bubbles will be injected here -->
             </div>
-        </section>
+          </div>
 
-        <!-- S2: 创建/编辑角色 (AI 生成) -->
-        <section id="screen-S2" class="screen hidden h-full flex flex-col bg-gray-50 overflow-y-auto">
-            <div class="max-w-5xl mx-auto w-full p-6 flex-1">
-                <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-2xl font-bold text-gray-800">创建新角色 (AI 辅助)</h2>
-                    <button onclick="showScreen('S1')" class="text-gray-500 hover:text-gray-700">返回 (Cancel)</button>
+          <!-- Playback Controls -->
+          <div
+            id="stage-controls"
+            class="bg-white border-t border-gray-200 p-4 flex items-center justify-center gap-4 hidden"
+          >
+            <button
+              onclick="alert('暂停')"
+              class="p-2 rounded-full hover:bg-gray-100 text-gray-600"
+              title="暂停"
+            >
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+            </button>
+            <button
+              id="btn-next-turn"
+              onclick="nextTurn()"
+              class="px-6 py-2 bg-indigo-600 text-white rounded-full shadow hover:bg-indigo-700 font-medium flex items-center gap-2"
+            >
+              <span>下一轮 (Next Turn)</span>
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 5l7 7-7 7M5 5l7 7-7 7"
+                ></path>
+              </svg>
+            </button>
+            <button
+              onclick="endShow()"
+              class="p-2 rounded-full hover:bg-red-50 text-red-600"
+              title="结束演出"
+            >
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- S2: 创建/编辑角色 (AI 生成) -->
+      <section
+        id="screen-S2"
+        class="screen hidden h-full flex flex-col bg-gray-50 overflow-y-auto"
+      >
+        <div class="max-w-5xl mx-auto w-full p-6 flex-1">
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-2xl font-bold text-gray-800">
+              创建新角色 (AI 辅助)
+            </h2>
+            <button
+              onclick="showScreen('S1')"
+              class="text-gray-500 hover:text-gray-700"
+            >
+              返回 (Cancel)
+            </button>
+          </div>
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 gap-8 h-[calc(100vh-150px)]"
+          >
+            <!-- Left: Input -->
+            <div class="flex flex-col gap-4">
+              <div
+                class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 flex-1 flex flex-col"
+              >
+                <label class="block text-sm font-medium text-gray-700 mb-2"
+                  >描述你想创建的角色</label
+                >
+                <p class="text-xs text-gray-500 mb-3">
+                  例如："一个来自未来的机器人，逻辑严密但总是无法理解人类的情感，说话喜欢带数据分析。"
+                </p>
+                <textarea
+                  id="role-prompt-input"
+                  class="flex-1 w-full p-3 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 resize-none"
+                  placeholder="在此输入角色描述..."
+                ></textarea>
+                <div class="mt-4">
+                  <button
+                    onclick="generateRole()"
+                    class="w-full flex justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700"
+                  >
+                    <svg
+                      class="w-5 h-5 mr-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M13 10V3L4 14h7v7l9-11h-7z"
+                      ></path>
+                    </svg>
+                    生成角色设定 (Generate)
+                  </button>
                 </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 h-[calc(100vh-150px)]">
-                    <!-- Left: Input -->
-                    <div class="flex flex-col gap-4">
-                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 flex-1 flex flex-col">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">描述你想创建的角色</label>
-                            <p class="text-xs text-gray-500 mb-3">例如："一个来自未来的机器人，逻辑严密但总是无法理解人类的情感，说话喜欢带数据分析。"</p>
-                            <textarea id="role-prompt-input" class="flex-1 w-full p-3 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 resize-none" placeholder="在此输入角色描述..."></textarea>
-                            <div class="mt-4">
-                                <button onclick="generateRole()" class="w-full flex justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700">
-                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                                    生成角色设定 (Generate)
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Right: Output Form -->
-                    <div class="flex flex-col gap-4">
-                         <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 flex-1 overflow-y-auto">
-                            <div class="flex justify-between items-start mb-4">
-                                <h3 class="text-lg font-medium text-gray-900">角色设定草稿</h3>
-                                <span class="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded">可编辑</span>
-                            </div>
-                            
-                            <div class="space-y-4">
-                                <div>
-                                    <label class="block text-xs font-medium text-gray-500">角色名称</label>
-                                    <input type="text" id="role-name" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border p-2">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-medium text-gray-500">背景简介</label>
-                                    <textarea id="role-bg" rows="3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border p-2"></textarea>
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-medium text-gray-500">说话风格</label>
-                                    <textarea id="role-style" rows="2" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border p-2"></textarea>
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-medium text-gray-500">行为原则</label>
-                                    <textarea id="role-behavior" rows="2" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border p-2"></textarea>
-                                </div>
-                            </div>
-                         </div>
-                         <button onclick="saveRole()" class="w-full flex justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">
-                            保存并使用 (Save & Use)
-                        </button>
-                    </div>
-                </div>
+              </div>
             </div>
-        </section>
 
-        <!-- S3: 模板库 -->
-        <section id="screen-S3" class="screen hidden h-full flex flex-col bg-gray-50">
-            <div class="max-w-6xl mx-auto w-full p-6 flex-1 flex flex-col">
-                <h2 class="text-2xl font-bold text-gray-800 mb-6">我的库 (Library)</h2>
-                
-                <!-- Search Filter -->
-                <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 mb-6 flex gap-4">
-                    <input type="text" placeholder="搜索模板..." class="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm">
-                    <select class="border border-gray-300 rounded-md px-3 py-2 text-sm bg-white">
-                        <option>全部类型</option>
-                        <option>场景</option>
-                        <option>角色</option>
-                    </select>
+            <!-- Right: Output Form -->
+            <div class="flex flex-col gap-4">
+              <div
+                class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 flex-1 overflow-y-auto"
+              >
+                <div class="flex justify-between items-start mb-4">
+                  <h3 class="text-lg font-medium text-gray-900">
+                    角色设定草稿
+                  </h3>
+                  <span
+                    class="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded"
+                    >可编辑</span
+                  >
                 </div>
 
-                <!-- List -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 overflow-y-auto pb-6">
-                    <!-- Scene Card -->
-                    <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer border-l-4 border-l-blue-500">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="font-bold text-gray-800">赛博朋克夜市</h3>
-                            <span class="text-xs text-blue-600 bg-blue-50 px-2 py-0.5 rounded">场景</span>
-                        </div>
-                        <p class="text-sm text-gray-500 line-clamp-3 mb-3">霓虹灯闪烁的雨夜，飞行汽车在头顶呼啸而过，路边摊贩卖着各种合成食物和非法插件...</p>
-                        <div class="flex justify-between items-center text-xs text-gray-400">
-                            <span>2小时前使用</span>
-                            <button class="text-indigo-600 hover:underline" onclick="showScreen('S1')">使用</button>
-                        </div>
-                    </div>
-                    
-                    <!-- Role Card -->
-                    <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer border-l-4 border-l-pink-500">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="font-bold text-gray-800">冷面杀手</h3>
-                            <span class="text-xs text-pink-600 bg-pink-50 px-2 py-0.5 rounded">角色</span>
-                        </div>
-                        <p class="text-sm text-gray-500 line-clamp-3 mb-3">代号X，从不多说废话，只关心任务和赏金。随身带着一把复古左轮手枪。</p>
-                        <div class="flex justify-between items-center text-xs text-gray-400">
-                            <span>1天前使用</span>
-                            <button class="text-indigo-600 hover:underline" onclick="showScreen('S1')">使用</button>
-                        </div>
-                    </div>
-
-                     <!-- Role Card -->
-                     <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer border-l-4 border-l-pink-500">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="font-bold text-gray-800">热血中二少年</h3>
-                            <span class="text-xs text-pink-600 bg-pink-50 px-2 py-0.5 rounded">角色</span>
-                        </div>
-                        <p class="text-sm text-gray-500 line-clamp-3 mb-3">坚信自己拥有拯救世界的力量，总是在关键时刻喊出招式名称。</p>
-                        <div class="flex justify-between items-center text-xs text-gray-400">
-                            <span>3天前使用</span>
-                            <button class="text-indigo-600 hover:underline" onclick="showScreen('S1')">使用</button>
-                        </div>
-                    </div>
+                <div class="space-y-4">
+                  <div>
+                    <label class="block text-xs font-medium text-gray-500"
+                      >角色名称</label
+                    >
+                    <input
+                      type="text"
+                      id="role-name"
+                      class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border p-2"
+                    />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-medium text-gray-500"
+                      >背景简介</label
+                    >
+                    <textarea
+                      id="role-bg"
+                      rows="3"
+                      class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border p-2"
+                    ></textarea>
+                  </div>
+                  <div>
+                    <label class="block text-xs font-medium text-gray-500"
+                      >说话风格</label
+                    >
+                    <textarea
+                      id="role-style"
+                      rows="2"
+                      class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border p-2"
+                    ></textarea>
+                  </div>
+                  <div>
+                    <label class="block text-xs font-medium text-gray-500"
+                      >行为原则</label
+                    >
+                    <textarea
+                      id="role-behavior"
+                      rows="2"
+                      class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border p-2"
+                    ></textarea>
+                  </div>
                 </div>
+              </div>
+              <button
+                onclick="saveRole()"
+                class="w-full flex justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+              >
+                保存并使用 (Save & Use)
+              </button>
             </div>
-        </section>
+          </div>
+        </div>
+      </section>
 
-         <!-- S4: 历史演出列表 -->
-         <section id="screen-S4" class="screen hidden h-full flex flex-col bg-gray-50">
-            <div class="max-w-5xl mx-auto w-full p-6 flex-1 flex flex-col">
-                <h2 class="text-2xl font-bold text-gray-800 mb-6">历史演出 (History)</h2>
-                
-                <div class="bg-white rounded-lg shadow overflow-hidden">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">状态</th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">场景</th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">角色数</th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">时间</th>
-                                <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">操作</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                            <tr class="hover:bg-gray-50 cursor-pointer" onclick="showScreen('S5')">
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">已完成</span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">武林外传番外</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">4</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">刚刚</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">回看</a>
-                                </td>
-                            </tr>
-                            <tr class="hover:bg-gray-50 cursor-pointer" onclick="showScreen('S5')">
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">进行中</span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">火星救援</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2小时前</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">继续</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+      <!-- S3: 模板库 -->
+      <section
+        id="screen-S3"
+        class="screen hidden h-full flex flex-col bg-gray-50"
+      >
+        <div class="max-w-6xl mx-auto w-full p-6 flex-1 flex flex-col">
+          <h2 class="text-2xl font-bold text-gray-800 mb-6">
+            我的库 (Library)
+          </h2>
+
+          <!-- Search Filter -->
+          <div
+            class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 mb-6 flex gap-4"
+          >
+            <input
+              type="text"
+              placeholder="搜索模板..."
+              class="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm"
+            />
+            <select
+              class="border border-gray-300 rounded-md px-3 py-2 text-sm bg-white"
+            >
+              <option>全部类型</option>
+              <option>场景</option>
+              <option>角色</option>
+            </select>
+          </div>
+
+          <!-- List -->
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 overflow-y-auto pb-6"
+          >
+            <!-- Scene Card -->
+            <div
+              class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer border-l-4 border-l-blue-500"
+            >
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="font-bold text-gray-800">赛博朋克夜市</h3>
+                <span
+                  class="text-xs text-blue-600 bg-blue-50 px-2 py-0.5 rounded"
+                  >场景</span
+                >
+              </div>
+              <p class="text-sm text-gray-500 line-clamp-3 mb-3">
+                霓虹灯闪烁的雨夜，飞行汽车在头顶呼啸而过，路边摊贩卖着各种合成食物和非法插件...
+              </p>
+              <div
+                class="flex justify-between items-center text-xs text-gray-400"
+              >
+                <span>2小时前使用</span>
+                <button
+                  class="text-indigo-600 hover:underline"
+                  onclick="showScreen('S1')"
+                >
+                  使用
+                </button>
+              </div>
             </div>
-         </section>
 
-         <!-- S5: 历史详情 -->
-         <section id="screen-S5" class="screen hidden h-full flex flex-col bg-white">
-             <div class="border-b border-gray-200 px-6 py-4 flex items-center justify-between bg-gray-50">
-                <div>
-                    <div class="flex items-center gap-2">
-                        <h2 class="text-xl font-bold text-gray-900">武林外传番外</h2>
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">已完成</span>
-                    </div>
-                    <p class="text-sm text-gray-500 mt-1">场景：同福客栈大堂 | 角色：佟湘玉, 白展堂, 郭芙蓉, 吕秀才</p>
-                </div>
-                <div class="flex gap-2">
-                    <button onclick="alert('已复制Prompt到剪贴板')" class="px-3 py-2 border border-gray-300 rounded text-sm text-gray-700 hover:bg-gray-100">复制 Prompt</button>
-                    <button onclick="showScreen('S1')" class="px-3 py-2 bg-indigo-600 text-white rounded text-sm hover:bg-indigo-700">基于此开新场</button>
-                    <button onclick="showScreen('S4')" class="text-gray-500 hover:text-gray-700 ml-4">返回列表</button>
-                </div>
-             </div>
-             <div class="flex-1 overflow-y-auto p-8 bg-gray-100">
-                 <div class="max-w-3xl mx-auto space-y-6">
-                     <!-- Replay Chat Item -->
-                     <div class="flex gap-4">
-                         <div class="w-10 h-10 rounded-full bg-red-100 flex-shrink-0 flex items-center justify-center text-red-600 font-bold">佟</div>
-                         <div class="flex flex-col max-w-[80%]">
-                             <div class="text-xs text-gray-500 mb-1">佟湘玉 • 第1轮</div>
-                             <div class="bg-white p-3 rounded-lg rounded-tl-none shadow-sm border border-gray-200 relative chat-bubble text-sm">
-                                 额滴神啊，这都什么时候了，大嘴的菜咋还没好呢？
-                             </div>
-                         </div>
-                     </div>
-                     <!-- Replay Chat Item -->
-                     <div class="flex gap-4 flex-row-reverse">
-                        <div class="w-10 h-10 rounded-full bg-blue-100 flex-shrink-0 flex items-center justify-center text-blue-600 font-bold">白</div>
-                        <div class="flex flex-col max-w-[80%] items-end">
-                            <div class="text-xs text-gray-500 mb-1">白展堂 • 第2轮</div>
-                            <div class="bg-white p-3 rounded-lg rounded-tr-none shadow-sm border border-gray-200 relative chat-bubble-right text-sm bg-blue-50">
-                                掌柜的，您就别催了，大嘴那脾气您又不是不知道，慢工出细活嘛。
-                            </div>
-                        </div>
-                    </div>
-                 </div>
-             </div>
-         </section>
+            <!-- Role Card -->
+            <div
+              class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer border-l-4 border-l-pink-500"
+            >
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="font-bold text-gray-800">冷面杀手</h3>
+                <span
+                  class="text-xs text-pink-600 bg-pink-50 px-2 py-0.5 rounded"
+                  >角色</span
+                >
+              </div>
+              <p class="text-sm text-gray-500 line-clamp-3 mb-3">
+                代号X，从不多说废话，只关心任务和赏金。随身带着一把复古左轮手枪。
+              </p>
+              <div
+                class="flex justify-between items-center text-xs text-gray-400"
+              >
+                <span>1天前使用</span>
+                <button
+                  class="text-indigo-600 hover:underline"
+                  onclick="showScreen('S1')"
+                >
+                  使用
+                </button>
+              </div>
+            </div>
 
+            <!-- Role Card -->
+            <div
+              class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer border-l-4 border-l-pink-500"
+            >
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="font-bold text-gray-800">热血中二少年</h3>
+                <span
+                  class="text-xs text-pink-600 bg-pink-50 px-2 py-0.5 rounded"
+                  >角色</span
+                >
+              </div>
+              <p class="text-sm text-gray-500 line-clamp-3 mb-3">
+                坚信自己拥有拯救世界的力量，总是在关键时刻喊出招式名称。
+              </p>
+              <div
+                class="flex justify-between items-center text-xs text-gray-400"
+              >
+                <span>3天前使用</span>
+                <button
+                  class="text-indigo-600 hover:underline"
+                  onclick="showScreen('S1')"
+                >
+                  使用
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- S4: 历史演出列表 -->
+      <section
+        id="screen-S4"
+        class="screen hidden h-full flex flex-col bg-gray-50"
+      >
+        <div class="max-w-5xl mx-auto w-full p-6 flex-1 flex flex-col">
+          <h2 class="text-2xl font-bold text-gray-800 mb-6">
+            历史演出 (History)
+          </h2>
+
+          <div class="bg-white rounded-lg shadow overflow-hidden">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    状态
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    场景
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    角色数
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    时间
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    操作
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-200">
+                <tr
+                  class="hover:bg-gray-50 cursor-pointer"
+                  onclick="showScreen('S5')"
+                >
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span
+                      class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
+                      >已完成</span
+                    >
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    武林外传番外
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    4
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    刚刚
+                  </td>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                  >
+                    <a href="#" class="text-indigo-600 hover:text-indigo-900"
+                      >回看</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  class="hover:bg-gray-50 cursor-pointer"
+                  onclick="showScreen('S5')"
+                >
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span
+                      class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800"
+                      >进行中</span
+                    >
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    火星救援
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    2
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    2小时前
+                  </td>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                  >
+                    <a href="#" class="text-indigo-600 hover:text-indigo-900"
+                      >继续</a
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- S5: 历史详情 -->
+      <section
+        id="screen-S5"
+        class="screen hidden h-full flex flex-col bg-white"
+      >
+        <div
+          class="border-b border-gray-200 px-6 py-4 flex items-center justify-between bg-gray-50"
+        >
+          <div>
+            <div class="flex items-center gap-2">
+              <h2 class="text-xl font-bold text-gray-900">武林外传番外</h2>
+              <span
+                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
+                >已完成</span
+              >
+            </div>
+            <p class="text-sm text-gray-500 mt-1">
+              场景：同福客栈大堂 | 角色：佟湘玉, 白展堂, 郭芙蓉, 吕秀才
+            </p>
+          </div>
+          <div class="flex gap-2">
+            <button
+              onclick="alert('已复制Prompt到剪贴板')"
+              class="px-3 py-2 border border-gray-300 rounded text-sm text-gray-700 hover:bg-gray-100"
+            >
+              复制 Prompt
+            </button>
+            <button
+              onclick="showScreen('S1')"
+              class="px-3 py-2 bg-indigo-600 text-white rounded text-sm hover:bg-indigo-700"
+            >
+              基于此开新场
+            </button>
+            <button
+              onclick="showScreen('S4')"
+              class="text-gray-500 hover:text-gray-700 ml-4"
+            >
+              返回列表
+            </button>
+          </div>
+        </div>
+        <div class="flex-1 overflow-y-auto p-8 bg-gray-100">
+          <div class="max-w-3xl mx-auto space-y-6">
+            <!-- Replay Chat Item -->
+            <div class="flex gap-4">
+              <div
+                class="w-10 h-10 rounded-full bg-red-100 flex-shrink-0 flex items-center justify-center text-red-600 font-bold"
+              >
+                佟
+              </div>
+              <div class="flex flex-col max-w-[80%]">
+                <div class="text-xs text-gray-500 mb-1">佟湘玉 • 第1轮</div>
+                <div
+                  class="bg-white p-3 rounded-lg rounded-tl-none shadow-sm border border-gray-200 relative chat-bubble text-sm"
+                >
+                  额滴神啊，这都什么时候了，大嘴的菜咋还没好呢？
+                </div>
+              </div>
+            </div>
+            <!-- Replay Chat Item -->
+            <div class="flex gap-4 flex-row-reverse">
+              <div
+                class="w-10 h-10 rounded-full bg-blue-100 flex-shrink-0 flex items-center justify-center text-blue-600 font-bold"
+              >
+                白
+              </div>
+              <div class="flex flex-col max-w-[80%] items-end">
+                <div class="text-xs text-gray-500 mb-1">白展堂 • 第2轮</div>
+                <div
+                  class="bg-white p-3 rounded-lg rounded-tr-none shadow-sm border border-gray-200 relative chat-bubble-right text-sm bg-blue-50"
+                >
+                  掌柜的，您就别催了，大嘴那脾气您又不是不知道，慢工出细活嘛。
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <script>
-        // Simple Screen Navigation
-        function showScreen(screenId) {
-            // Hide all screens
-            document.querySelectorAll('.screen').forEach(el => el.classList.add('hidden'));
-            // Show target screen
-            const target = document.getElementById('screen-' + screenId);
-            if (target) {
-                target.classList.remove('hidden');
-            }
-            // Update nav state (optional/simple)
+      // Simple Screen Navigation
+      function showScreen(screenId) {
+        // Hide all screens
+        document
+          .querySelectorAll(".screen")
+          .forEach((el) => el.classList.add("hidden"));
+        // Show target screen
+        const target = document.getElementById("screen-" + screenId);
+        if (target) {
+          target.classList.remove("hidden");
+        }
+        // Update nav state (optional/simple)
+      }
+
+      // Mock S1 Logic
+      let currentRound = 0;
+      const maxRounds = 5;
+
+      function startShow() {
+        document.getElementById("stage-empty").classList.add("hidden");
+        document.getElementById("stage-content").classList.remove("hidden");
+        document.getElementById("stage-controls").classList.remove("hidden");
+
+        // Reset
+        currentRound = 0;
+        document.getElementById("chat-stream").innerHTML = "";
+        updateRoundDisplay();
+
+        // Auto start first turn
+        setTimeout(() => nextTurn(), 500);
+      }
+
+      function endShow() {
+        if (confirm("确定要结束本场演出吗？")) {
+          // Reset UI
+          document.getElementById("stage-empty").classList.remove("hidden");
+          document.getElementById("stage-content").classList.add("hidden");
+          document.getElementById("stage-controls").classList.add("hidden");
+          currentRound = 0;
+        }
+      }
+
+      function updateRoundDisplay() {
+        document.getElementById("current-round-display").innerText =
+          currentRound;
+      }
+
+      function nextTurn() {
+        if (currentRound >= maxRounds) {
+          alert("演出已结束！");
+          return;
         }
 
-        // Mock S1 Logic
-        let currentRound = 0;
-        const maxRounds = 5;
-        
-        function startShow() {
-            document.getElementById('stage-empty').classList.add('hidden');
-            document.getElementById('stage-content').classList.remove('hidden');
-            document.getElementById('stage-controls').classList.remove('hidden');
-            
-            // Reset
-            currentRound = 0;
-            document.getElementById('chat-stream').innerHTML = '';
-            updateRoundDisplay();
-            
-            // Auto start first turn
-            setTimeout(() => nextTurn(), 500);
-        }
+        currentRound++;
+        updateRoundDisplay();
 
-        function endShow() {
-            if(confirm('确定要结束本场演出吗？')) {
-                // Reset UI
-                document.getElementById('stage-empty').classList.remove('hidden');
-                document.getElementById('stage-content').classList.add('hidden');
-                document.getElementById('stage-controls').classList.add('hidden');
-                currentRound = 0;
-            }
-        }
+        const roles = [
+          {
+            name: "老板",
+            color: "blue",
+            initial: "老",
+            text: "（擦着杯子）今晚想喝点什么？还是老样子？"
+          },
+          {
+            name: "失恋女",
+            color: "pink",
+            initial: "女",
+            text: "（叹气）给我来一杯最烈的酒，能忘掉一切的那种。"
+          },
+          {
+            name: "老板",
+            color: "blue",
+            initial: "老",
+            text: "忘掉一切的酒没有，不过有一碗暖胃的面，要不要试试？"
+          },
+          {
+            name: "失恋女",
+            color: "pink",
+            initial: "女",
+            text: "（苦笑）面能暖胃，能暖心吗？"
+          },
+          {
+            name: "老板",
+            color: "blue",
+            initial: "老",
+            text: "心暖不暖不知道，肚子饱了，心也就没那么空了。"
+          }
+        ];
 
-        function updateRoundDisplay() {
-            document.getElementById('current-round-display').innerText = currentRound;
-        }
+        const role = roles[(currentRound - 1) % roles.length];
+        const isRight = currentRound % 2 === 0;
 
-        function nextTurn() {
-            if (currentRound >= maxRounds) {
-                alert('演出已结束！');
-                return;
-            }
-            
-            currentRound++;
-            updateRoundDisplay();
-            
-            const roles = [
-                { name: '老板', color: 'blue', initial: '老', text: '（擦着杯子）今晚想喝点什么？还是老样子？' },
-                { name: '失恋女', color: 'pink', initial: '女', text: '（叹气）给我来一杯最烈的酒，能忘掉一切的那种。' },
-                { name: '老板', color: 'blue', initial: '老', text: '忘掉一切的酒没有，不过有一碗暖胃的面，要不要试试？' },
-                { name: '失恋女', color: 'pink', initial: '女', text: '（苦笑）面能暖胃，能暖心吗？' },
-                { name: '老板', color: 'blue', initial: '老', text: '心暖不暖不知道，肚子饱了，心也就没那么空了。' }
-            ];
-            
-            const role = roles[(currentRound - 1) % roles.length];
-            const isRight = (currentRound % 2 === 0);
-            
-            const bubbleHtml = `
-                <div class="flex gap-4 ${isRight ? 'flex-row-reverse' : ''} animate-fade-in-up">
+        const bubbleHtml = `
+                <div class="flex gap-4 ${isRight ? "flex-row-reverse" : ""} animate-fade-in-up">
                     <div class="w-10 h-10 rounded-full bg-${role.color}-100 flex-shrink-0 flex items-center justify-center text-${role.color}-600 font-bold border border-${role.color}-200">${role.initial}</div>
-                    <div class="flex flex-col max-w-[80%] ${isRight ? 'items-end' : ''}">
+                    <div class="flex flex-col max-w-[80%] ${isRight ? "items-end" : ""}">
                         <div class="text-xs text-gray-500 mb-1">${role.name} • 第${currentRound}轮</div>
-                        <div class="bg-white p-3 rounded-lg ${isRight ? 'rounded-tr-none bg-blue-50 chat-bubble-right' : 'rounded-tl-none chat-bubble'} shadow-sm border border-gray-200 relative text-sm">
+                        <div class="bg-white p-3 rounded-lg ${isRight ? "rounded-tr-none bg-blue-50 chat-bubble-right" : "rounded-tl-none chat-bubble"} shadow-sm border border-gray-200 relative text-sm">
                             ${role.text}
                         </div>
                     </div>
                 </div>
             `;
-            
-            const container = document.getElementById('chat-stream');
-            const div = document.createElement('div');
-            div.innerHTML = bubbleHtml;
-            container.appendChild(div.firstElementChild);
-            
-            // Scroll to bottom
-            const scrollArea = document.getElementById('stage-content');
-            scrollArea.scrollTop = scrollArea.scrollHeight;
-        }
 
-        // Mock S2 Logic
-        function generateRole() {
-            const btn = event.currentTarget;
-            const originalText = btn.innerHTML;
-            btn.disabled = true;
-            btn.innerHTML = `<svg class="animate-spin h-5 w-5 mr-2 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> 生成中...`;
-            
-            setTimeout(() => {
-                document.getElementById('role-name').value = 'T-800';
-                document.getElementById('role-bg').value = '来自2029年的终结者机器人，外表是人类，内核是冷酷的杀戮机器，但在学习人类情感。';
-                document.getElementById('role-style').value = '毫无语调起伏，喜欢使用精准的数据，回答简短有力，常用“肯定”、“否定”。';
-                document.getElementById('role-behavior').value = '优先保护目标人物，对敌对行为零容忍，逻辑优先。';
-                
-                btn.disabled = false;
-                btn.innerHTML = originalText;
-            }, 1500);
-        }
+        const container = document.getElementById("chat-stream");
+        const div = document.createElement("div");
+        div.innerHTML = bubbleHtml;
+        container.appendChild(div.firstElementChild);
 
-        function saveRole() {
-            alert('角色模板保存成功！已添加到您的库。');
-            showScreen('S1');
-        }
+        // Scroll to bottom
+        const scrollArea = document.getElementById("stage-content");
+        scrollArea.scrollTop = scrollArea.scrollHeight;
+      }
 
-        // Animation helper
-        const style = document.createElement('style');
-        style.innerHTML = `
+      // Mock S2 Logic
+      function generateRole() {
+        const btn = event.currentTarget;
+        const originalText = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = `<svg class="animate-spin h-5 w-5 mr-2 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> 生成中...`;
+
+        setTimeout(() => {
+          document.getElementById("role-name").value = "T-800";
+          document.getElementById("role-bg").value =
+            "来自2029年的终结者机器人，外表是人类，内核是冷酷的杀戮机器，但在学习人类情感。";
+          document.getElementById("role-style").value =
+            "毫无语调起伏，喜欢使用精准的数据，回答简短有力，常用“肯定”、“否定”。";
+          document.getElementById("role-behavior").value =
+            "优先保护目标人物，对敌对行为零容忍，逻辑优先。";
+
+          btn.disabled = false;
+          btn.innerHTML = originalText;
+        }, 1500);
+      }
+
+      function saveRole() {
+        alert("角色模板保存成功！已添加到您的库。");
+        showScreen("S1");
+      }
+
+      // Animation helper
+      const style = document.createElement("style");
+      style.innerHTML = `
             @keyframes fadeInUp {
                 from { opacity: 0; transform: translateY(10px); }
                 to { opacity: 1; transform: translateY(0); }
@@ -509,9 +950,7 @@
                 animation: fadeInUp 0.3s ease-out forwards;
             }
         `;
-        document.head.appendChild(style);
-
+      document.head.appendChild(style);
     </script>
-</body>
+  </body>
 </html>
-

@@ -5,7 +5,7 @@
 **Status**: Draft  
 **Input**: User description: "创立一个AI情景剧的应用。AI作为演员，多个AI扮演各自的角色进行轮流对话。同时提供利用AI生成AI演员的prompt的功能。提供场景prompt,角色prompt的保存与选取功能"
 
-## User Scenarios & Testing *(mandatory)*
+## User Scenarios & Testing _(mandatory)_
 
 ### User Story 1 - 创建并观看一场多 AI 情景剧 (Priority: P1)
 
@@ -71,7 +71,7 @@
 - Q: 当用户关闭或刷新页面时，正在进行中的情景剧演出应如何处理？ → A: 支持在下次进入时从中断处继续演出，基于已保存对话重建上下文继续生成后续轮次。
 - Q: 历史演出记录的保留与删除策略是什么？ → A: 默认长期保留所有历史演出，用户可在历史列表中手动删除任意记录。
 
-## Requirements *(mandatory)*
+## Requirements _(mandatory)_
 
 ### Functional Requirements
 
@@ -89,7 +89,7 @@
 - **FR-012**: System MUST allow users to resume an in-progress DramaSession after closing or refreshing the page, by restoring its configuration and all previously generated Turns, and continuing to generate subsequent Turns from the last saved state using the stateless AI model.
 - **FR-013**: System MUST provide a 「历史演出」列表视图，用于展示用户全部已保存的 DramaSession，并允许用户在该列表中选择并删除任意一条或多条历史演出记录；未被用户删除的记录默认长期保留。
 
-### Key Entities *(include if feature involves data)*
+### Key Entities _(include if feature involves data)_
 
 - **User**: 使用本应用配置和观看 AI 情景剧的个人；拥有自己的场景模板库、角色模板库和历史演出记录。
 - **SceneTemplate（场景模板）**: 描述情景剧整体背景和气氛的文本设定，包含：名称、详细描述、标签、创建时间和最近使用时间。
@@ -97,7 +97,7 @@
 - **DramaSession（情景剧会话）**: 一次实际的演出实例，引用一个 SceneTemplate 和 2–6 个 RoleTemplate，并记录配置参数（轮流顺序、总轮数等）与每一轮对话内容，并将完整对话持久化存储以便后续回看，包含状态字段（如进行中、已完成），用于支持中断后继续演出。
 - **Turn（对话轮次）**: DramaSession 内的单轮发言单元，包含：轮次编号、发言角色、生成文本、时间，以及与前后轮次的顺序关系，用于在「历史演出详情」中逐轮展示。
 
-## Success Criteria *(mandatory)*
+## Success Criteria _(mandatory)_
 
 ### Measurable Outcomes
 
@@ -112,7 +112,7 @@
 - 用户创建的场景模板、角色模板和演出记录默认仅对本人可见，不涉及公开社区分享与内容平台分发。
 - 系统默认支持多语言内容创作，但界面语言与文案以简体中文为主；多语言切换属于后续扩展范畴。
 - 安全与合规按通用内容创作产品的行业标准执行，不涉及特殊高敏感行业（如医疗、金融合规审计等）的专门要求。
- - 历史演出记录在默认情况下长期保留，不设置自动过期时间；用户可随时通过产品界面手动删除任意历史演出记录。
+- 历史演出记录在默认情况下长期保留，不设置自动过期时间；用户可随时通过产品界面手动删除任意历史演出记录。
 
 ## Dependencies & Constraints
 
@@ -120,5 +120,3 @@
 - 依赖基础的用户账号体系，以便将场景模板、角色模板和演出记录与具体用户关联和持久化存储。
 - UI 需能清晰展示多角色轮流发言与当前轮次状态，但本规格不限定具体交互形式，仅要求信息对用户一目了然。
 - 本阶段仅支持纯文本对话输出（文字对话区/气泡），不提供语音或视频播放功能；语音/视频演出能力明确归为后续版本范围，不在本规格内。
-
- 
