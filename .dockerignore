@@ -1,0 +1,30 @@
+# Dependencies & build artifacts
+node_modules/
+dist/
+build/
+.next/
+.turbo/
+coverage/
+
+# Git & tooling
+.git/
+.gitignore
+.dockerignore
+
+# Environment & secrets
+.env
+.env.*
+
+# Logs
+*.log
+logs/
+
+# Editor & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.tmp
+
+
