@@ -1,0 +1,19 @@
+node_modules/
+.next/
+dist/
+build/
+.turbo/
+coverage/
+
+# Generated artifacts
+prisma/migrations/
+
+# Documentation & specs (lint 可选)
+specs/
+docs/
+
+# Rules && Agent Scripts
+.cursor/
+.specify/
+
+

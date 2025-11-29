@@ -1,0 +1,21 @@
+node_modules/
+dist/
+build/
+.next/
+.turbo/
+coverage/
+
+# Package manager lockfiles
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Generated artifacts
+prisma/migrations/
+
+# Rules && Agent Scripts
+.cursor/
+.specify/
+
+# Documentation 
+docs/
