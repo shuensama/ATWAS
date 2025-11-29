@@ -1,0 +1,43 @@
+{
+  "name": "atwas-ai-drama-stage",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "vitest",
+    "test:unit": "vitest run tests/unit",
+    "test:integration": "vitest run tests/integration",
+    "test:contract": "vitest run tests/contract",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@prisma/client": "^5.17.0",
+    "next": "14.2.3",
+    "next-auth": "^5.0.0-beta.20",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.4.0",
+    "@testing-library/react": "^14.1.2",
+    "@types/node": "^20.14.10",
+    "@types/react": "^18.3.3",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "14.2.3",
+    "postcss": "^8.4.41",
+    "prettier": "^3.3.3",
+    "prisma": "^5.17.0",
+    "tailwindcss": "^3.4.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4",
+    "vitest": "^2.1.4"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
