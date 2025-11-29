@@ -23,11 +23,11 @@ description: "Implementation tasks for AI情景剧舞台（多 AI 角色轮流�
 
 **Purpose**: 初始化 Next.js 项目骨架与通用开发环境，为后续特性实现提供基础。
 
-- [ ] T001 初始化或更新 Next.js 14 App Router 项目骨架（`package.json`, `next.config.mjs`, `tsconfig.json`, `app/layout.tsx`, `app/page.tsx`），确保与 `plan.md` 中的单体应用结构一致。
-- [ ] T002 [P] 安装并配置 Tailwind CSS 与 shadcn/ui（`tailwind.config.ts`, `postcss.config.mjs`, `app/globals.css`, `components/` 中基础 UI 目录），使其可在 `app/(drama-stage)/page.tsx` 中直接使用。
-- [ ] T003 [P] 配置统一的 ESLint 与 Prettier 规则（`.eslintrc.*`, `prettier.config.*`），并在 `package.json` 中添加 `lint` 与 `format` 脚本。
-- [ ] T004 [P] 在仓库根目录创建或更新 `.env.example`，补全 `DATABASE_URL`, `AUTH_SECRET`, `NEXTAUTH_URL`, `OPENAI_API_KEY`, `OPENAI_BASE_URL`, `OPENAI_MODEL` 等键，使其与 `specs/001-ai-drama-stage/quickstart.md` 示例保持一致。
-- [ ] T005 [P] 创建或更新根目录 `CHANGELOG.md`，添加「AI情景剧舞台（多 AI 角色轮流对话）」特性条目并链接到 `specs/001-ai-drama-stage/` 文档。
+- [x] T001 初始化或更新 Next.js 14 App Router 项目骨架（`package.json`, `next.config.mjs`, `tsconfig.json`, `app/layout.tsx`, `app/page.tsx`），确保与 `plan.md` 中的单体应用结构一致。
+- [x] T002 [P] 安装并配置 Tailwind CSS 与 shadcn/ui（`tailwind.config.ts`, `postcss.config.mjs`, `app/globals.css`, `components/` 中基础 UI 目录），使其可在 `app/(drama-stage)/page.tsx` 中直接使用。
+- [x] T003 [P] 配置统一的 ESLint 与 Prettier 规则（`.eslintrc.*`, `prettier.config.*`），并在 `package.json` 中添加 `lint` 与 `format` 脚本。
+- [x] T004 [P] 在仓库根目录创建或更新 `.env.example`，补全 `DATABASE_URL`, `AUTH_SECRET`, `NEXTAUTH_URL`, `OPENAI_API_KEY`, `OPENAI_BASE_URL`, `OPENAI_MODEL` 等键，使其与 `specs/001-ai-drama-stage/quickstart.md` 示例保持一致。
+- [x] T005 [P] 创建或更新根目录 `CHANGELOG.md`，添加「AI情景剧舞台（多 AI 角色轮流对话）」特性条目并链接到 `specs/001-ai-drama-stage/` 文档。
 
 ---
 
@@ -150,8 +150,8 @@ description: "Implementation tasks for AI情景剧舞台（多 AI 角色轮流�
 
 ### User Story Dependencies
 
-- **User Story 1 (P1)**: 仅依赖 Phase 2 基础设施；可作为首个可演示 MVP。  
-- **User Story 2 (P2)**: 依赖 Phase 2 以及角色模板基础 API（T020）；与 US1 在技术上可并行，但不依赖 US3。  
+- **User Story 1 (P1)**: 仅依赖 Phase 2 基础设施；可作为首个可演示 MVP。
+- **User Story 2 (P2)**: 依赖 Phase 2 以及角色模板基础 API（T020）；与 US1 在技术上可并行，但不依赖 US3。
 - **User Story 3 (P3)**: 依赖 Phase 2 以及模板相关 API（T019–T020）；在产品视角上增强 US1/US2 的复用效率，但实现顺序上可在 US2 前后灵活安排。
 
 ---
@@ -161,25 +161,25 @@ description: "Implementation tasks for AI情景剧舞台（多 AI 角色轮流�
 ### User Story 1
 
 - 可并行实施的任务示例：
-  - T019, T020, T022–T025（各 API Route 与 orchestrator 实现，文件路径不同）  
-  - T026–T028（前端组件 `components/drama/*`）  
-  - T017–T018（单元与集成测试）  
+  - T019, T020, T022–T025（各 API Route 与 orchestrator 实现，文件路径不同）
+  - T026–T028（前端组件 `components/drama/*`）
+  - T017–T018（单元与集成测试）
 - 推荐顺序：先完成 T021/T022/T025（核心编排与会话 API），再接 UI 任务与 smoke 脚本（T026–T033）。
 
 ### User Story 2
 
 - 可并行实施的任务示例：
-  - T035–T036（prompt 模板与 AI 生成接口实现）  
-  - T037–T038（前端集成与保存逻辑）  
-  - T034（集成测试）  
+  - T035–T036（prompt 模板与 AI 生成接口实现）
+  - T037–T038（前端集成与保存逻辑）
+  - T034（集成测试）
 - 推荐顺序：先完成后端 API（T035–T036），再并行推进前端集成与测试（T037–T038, T034）。
 
 ### User Story 3
 
 - 可并行实施的任务示例：
-  - T040–T041（模板库页面与组件）  
-  - T042–T043（场景/角色模板 API 扩展）  
-  - T039（集成测试）  
+  - T040–T041（模板库页面与组件）
+  - T042–T043（场景/角色模板 API 扩展）
+  - T039（集成测试）
 - 推荐顺序：先实现/扩展 API（T042–T043），随后并行完成 UI（T040–T041）与测试（T039）。
 
 ---
@@ -188,28 +188,26 @@ description: "Implementation tasks for AI情景剧舞台（多 AI 角色轮流�
 
 ### MVP First（仅 User Story 1）
 
-1. 完成 Phase 1: Setup（T001–T005）。  
-2. 完成 Phase 2: Foundational（T006–T016）。  
-3. 完成 Phase 3: User Story 1（T017–T033）。  
-4. 运行 P1 smoke 脚本与手动 UI 验证，确认 US1 独立可用。  
+1. 完成 Phase 1: Setup（T001–T005）。
+2. 完成 Phase 2: Foundational（T006–T016）。
+3. 完成 Phase 3: User Story 1（T017–T033）。
+4. 运行 P1 smoke 脚本与手动 UI 验证，确认 US1 独立可用。
 5. 在此基础上可进行首次部署或演示。
 
 ### Incremental Delivery
 
-1. 完成 Setup + Foundational → 基础设施就绪。  
-2. 添加 User Story 1 → 独立测试与演示（MVP）。  
-3. 添加 User Story 2 → 提升新角色创建体验。  
-4. 添加 User Story 3 → 提升模板复用与管理效率。  
+1. 完成 Setup + Foundational → 基础设施就绪。
+2. 添加 User Story 1 → 独立测试与演示（MVP）。
+3. 添加 User Story 2 → 提升新角色创建体验。
+4. 添加 User Story 3 → 提升模板复用与管理效率。
 5. 最后执行 Polish 阶段任务（日志、性能、安全、文档）。
 
 ### Parallel Team Strategy
 
 在团队规模允许的情况下：
 
-- 一名工程师聚焦后端（Prisma, Repositories, API Routes，T006–T016, T019–T025, T035–T036, T042–T043）。  
-- 一名工程师聚焦前端 UI（`app/(drama-stage)/*`, `components/drama/*`，T026–T031, T037–T041, T044）。  
-- 一名工程师聚焦测试与脚本（`tests/*`, `scripts/smoke/*`, `scripts/benchmarks/*`，T017–T018, T032, T034, T039, T047–T048）。  
+- 一名工程师聚焦后端（Prisma, Repositories, API Routes，T006–T016, T019–T025, T035–T036, T042–T043）。
+- 一名工程师聚焦前端 UI（`app/(drama-stage)/*`, `components/drama/*`，T026–T031, T037–T041, T044）。
+- 一名工程师聚焦测试与脚本（`tests/*`, `scripts/smoke/*`, `scripts/benchmarks/*`，T017–T018, T032, T034, T039, T047–T048）。
 
 所有任务均遵循 `- [ ] Txxx [P?] [US?] Description with file path` 的清单格式，便于 LLM 或工程师按顺序与并行度直接执行。
-
-
