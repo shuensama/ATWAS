@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>历史演出 - S4</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #888; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+    </style>
+</head>
+<body class="bg-gray-100 h-screen flex flex-col text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm px-6 py-3 flex justify-between items-center z-10">
+        <div class="flex items-center gap-4">
+            <div class="text-xl font-bold text-indigo-600"><i class="fa-solid fa-theater-masks mr-2"></i>AI 情景剧舞台</div>
+            <nav class="hidden md:flex gap-4 text-sm text-gray-600">
+                <a href="index.html" class="hover:text-indigo-600 transition">创作与演出</a>
+                <a href="library.html" class="hover:text-indigo-600 transition">我的库</a>
+                <a href="history.html" class="font-semibold text-indigo-600 border-b-2 border-indigo-600 pb-1">历史演出</a>
+            </nav>
+        </div>
+        <div class="flex items-center gap-3">
+            <span class="text-sm text-gray-600">创作者小王</span>
+            <div class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600">
+                <i class="fa-solid fa-user"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="flex-1 overflow-hidden flex flex-col max-w-5xl mx-auto w-full p-6">
+        
+        <!-- Filter Bar -->
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold text-gray-800">历史演出记录</h1>
+            <div class="flex gap-3">
+                <select class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none shadow-sm">
+                    <option>所有状态</option>
+                    <option>进行中</option>
+                    <option>已完成</option>
+                </select>
+                <select class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none shadow-sm">
+                    <option>最近更新</option>
+                    <option>最早创建</option>
+                </select>
+                <div class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    <input type="text" placeholder="搜索..." class="pl-9 pr-4 py-2 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none shadow-sm">
+                </div>
+            </div>
+        </div>
+
+        <!-- History List -->
+        <div class="flex-1 overflow-y-auto bg-white rounded-xl shadow-sm border border-gray-200">
+            <table class="w-full text-left">
+                <thead class="bg-gray-50 border-b border-gray-200 text-xs text-gray-500 uppercase">
+                    <tr>
+                        <th class="px-6 py-3 font-medium">状态</th>
+                        <th class="px-6 py-3 font-medium">会话ID / 场景</th>
+                        <th class="px-6 py-3 font-medium">演员阵容</th>
+                        <th class="px-6 py-3 font-medium">轮数进度</th>
+                        <th class="px-6 py-3 font-medium">最后更新</th>
+                        <th class="px-6 py-3 font-medium text-right">操作</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                    
+                    <!-- Item 1: In Progress -->
+                    <tr class="hover:bg-indigo-50/30 transition group">
+                        <td class="px-6 py-4">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                <span class="w-1.5 h-1.5 bg-green-600 rounded-full mr-1.5 animate-pulse"></span>
+                                进行中
+                            </span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="text-sm font-bold text-gray-900">#20251129-001</div>
+                            <div class="text-xs text-gray-500 mt-0.5"><i class="fa-solid fa-map-location-dot mr-1"></i>雨夜咖啡馆</div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex -space-x-2 overflow-hidden">
+                                <div class="inline-block h-8 w-8 rounded-full ring-2 ring-white bg-blue-100 text-blue-600 flex items-center justify-center text-xs" title="侦探雷蒙"><i class="fa-solid fa-user-secret"></i></div>
+                                <div class="inline-block h-8 w-8 rounded-full ring-2 ring-white bg-pink-100 text-pink-600 flex items-center justify-center text-xs" title="神秘女子"><i class="fa-solid fa-user-nurse"></i></div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="text-sm text-gray-900 font-semibold">2 / 5</div>
+                            <div class="w-24 bg-gray-200 rounded-full h-1.5 mt-1.5">
+                                <div class="bg-green-500 h-1.5 rounded-full" style="width: 40%"></div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-500">刚刚</td>
+                        <td class="px-6 py-4 text-right space-x-2">
+                            <a href="history-detail.html" class="text-indigo-600 hover:text-indigo-900 font-semibold text-sm">继续演出</a>
+                            <button class="text-gray-400 hover:text-red-600 transition opacity-0 group-hover:opacity-100"><i class="fa-solid fa-trash"></i></button>
+                        </td>
+                    </tr>
+
+                    <!-- Item 2: Completed -->
+                    <tr class="hover:bg-gray-50 transition group">
+                        <td class="px-6 py-4">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                已完成
+                            </span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="text-sm font-bold text-gray-900">#20251128-005</div>
+                            <div class="text-xs text-gray-500 mt-0.5"><i class="fa-solid fa-map-location-dot mr-1"></i>火星殖民地</div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex -space-x-2 overflow-hidden">
+                                <div class="inline-block h-8 w-8 rounded-full ring-2 ring-white bg-gray-200 text-gray-600 flex items-center justify-center text-xs"><i class="fa-solid fa-robot"></i></div>
+                                <div class="inline-block h-8 w-8 rounded-full ring-2 ring-white bg-yellow-100 text-yellow-600 flex items-center justify-center text-xs"><i class="fa-solid fa-user-astronaut"></i></div>
+                                <div class="inline-block h-8 w-8 rounded-full ring-2 ring-white bg-purple-100 text-purple-600 flex items-center justify-center text-xs"><i class="fa-solid fa-user-tie"></i></div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="text-sm text-gray-900">10 / 10</div>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-500">昨天 18:30</td>
+                        <td class="px-6 py-4 text-right space-x-2">
+                            <a href="history-detail.html" class="text-gray-600 hover:text-indigo-600 text-sm">查看详情</a>
+                            <button class="text-gray-400 hover:text-red-600 transition opacity-0 group-hover:opacity-100"><i class="fa-solid fa-trash"></i></button>
+                        </td>
+                    </tr>
+
+                    <!-- Item 3: Completed -->
+                    <tr class="hover:bg-gray-50 transition group">
+                        <td class="px-6 py-4">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                已完成
+                            </span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="text-sm font-bold text-gray-900">#20251127-002</div>
+                            <div class="text-xs text-gray-500 mt-0.5"><i class="fa-solid fa-map-location-dot mr-1"></i>雨夜咖啡馆</div>
+                        </td>
+                        <td class="px-6 py-4">
+                             <div class="flex -space-x-2 overflow-hidden">
+                                <div class="inline-block h-8 w-8 rounded-full ring-2 ring-white bg-blue-100 text-blue-600 flex items-center justify-center text-xs" title="侦探雷蒙"><i class="fa-solid fa-user-secret"></i></div>
+                                <div class="inline-block h-8 w-8 rounded-full ring-2 ring-white bg-pink-100 text-pink-600 flex items-center justify-center text-xs" title="神秘女子"><i class="fa-solid fa-user-nurse"></i></div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="text-sm text-gray-900">8 / 8</div>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-500">2天前</td>
+                        <td class="px-6 py-4 text-right space-x-2">
+                            <a href="history-detail.html" class="text-gray-600 hover:text-indigo-600 text-sm">查看详情</a>
+                            <button class="text-gray-400 hover:text-red-600 transition opacity-0 group-hover:opacity-100"><i class="fa-solid fa-trash"></i></button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
+

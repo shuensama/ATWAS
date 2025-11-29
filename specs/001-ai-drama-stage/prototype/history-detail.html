@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>历史详情 - S5</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #888; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+    </style>
+</head>
+<body class="bg-gray-100 h-screen flex flex-col text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm px-6 py-3 flex justify-between items-center z-10">
+        <div class="flex items-center gap-4">
+            <a href="history.html" class="text-gray-500 hover:text-gray-800"><i class="fa-solid fa-arrow-left mr-1"></i> 返回列表</a>
+            <div class="h-6 w-px bg-gray-300"></div>
+            <div class="flex flex-col">
+                <span class="font-bold text-gray-800 text-sm">火星殖民地 #20251128-005</span>
+                <span class="text-xs text-gray-500">已完成 • 2025-11-28 18:30</span>
+            </div>
+        </div>
+        <div class="flex gap-3">
+            <button class="px-4 py-2 bg-white border border-gray-200 text-gray-700 text-sm rounded-lg hover:bg-gray-50 transition">
+                <i class="fa-regular fa-copy mr-1"></i> 复制 Prompt
+            </button>
+            <a href="index.html" class="px-4 py-2 bg-indigo-600 text-white text-sm rounded-lg hover:bg-indigo-700 transition shadow-sm">
+                <i class="fa-solid fa-rotate-right mr-1"></i> 基于本场开新场
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex overflow-hidden">
+        
+        <!-- Left Panel: Conversation Timeline (Read Only) -->
+        <main class="flex-1 flex flex-col bg-slate-50 overflow-y-auto p-8 space-y-6">
+            
+            <!-- Turn 1 -->
+            <div class="flex gap-4">
+                <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-gray-600 text-xl shrink-0 border-2 border-white shadow-sm">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div class="flex-1 max-w-3xl">
+                    <div class="flex items-baseline gap-2 mb-1">
+                        <span class="font-bold text-gray-800">Z-9000</span>
+                        <span class="text-xs text-gray-400">第 1 轮</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-r-xl rounded-bl-xl shadow-sm border border-gray-100 text-gray-700 leading-relaxed">
+                        根据我的计算，火星大气的氧气含量在过去3小时内下降了0.03%。虽然这对人类呼吸系统暂无影响，但对于——（停顿）——对于温室里的土豆来说，可能是一个悲伤的消息。哈哈。
+                    </div>
+                </div>
+            </div>
+
+            <!-- Turn 2 -->
+            <div class="flex gap-4 flex-row-reverse">
+                <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600 text-xl shrink-0 border-2 border-white shadow-sm">
+                    <i class="fa-solid fa-user-astronaut"></i>
+                </div>
+                <div class="flex-1 max-w-3xl flex flex-col items-end">
+                    <div class="flex items-baseline gap-2 mb-1">
+                        <span class="text-xs text-gray-400">第 2 轮</span>
+                        <span class="font-bold text-gray-800">指挥官约翰</span>
+                    </div>
+                    <div class="bg-indigo-50 p-4 rounded-l-xl rounded-br-xl shadow-sm border border-indigo-100 text-gray-700 leading-relaxed text-right">
+                        Z-9000，专注于你的工作。土豆比我们要坚强。我们需要先检查空气循环系统的阀门。别再讲笑话了，这不好笑。
+                    </div>
+                </div>
+            </div>
+
+            <!-- Turn 3 -->
+            <div class="flex gap-4">
+                 <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 text-xl shrink-0 border-2 border-white shadow-sm">
+                    <i class="fa-solid fa-user-tie"></i>
+                </div>
+                <div class="flex-1 max-w-3xl">
+                    <div class="flex items-baseline gap-2 mb-1">
+                        <span class="font-bold text-gray-800">公司代表</span>
+                        <span class="text-xs text-gray-400">第 3 轮</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-r-xl rounded-bl-xl shadow-sm border border-gray-100 text-gray-700 leading-relaxed">
+                        如果阀门坏了，维修预算会超出这个季度的配额。约翰，你能确定这不是因为操作失误吗？我不希望向董事会报告坏消息。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center text-gray-400 text-sm py-4">
+                --- 演出已结束 ---
+            </div>
+
+        </main>
+
+        <!-- Right Panel: Config Snapshot -->
+        <aside class="w-80 bg-white border-l border-gray-200 flex flex-col overflow-y-auto p-5 space-y-6">
+            
+            <!-- Scene Snapshot -->
+            <div>
+                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">场景快照</h3>
+                <div class="bg-gray-50 rounded-lg p-3 border border-gray-100">
+                    <div class="font-bold text-gray-800 text-sm mb-1">火星殖民地</div>
+                    <p class="text-xs text-gray-500 leading-relaxed">2050年，火星第一座永久基地。资源匮乏，人心浮动。外部环境恶劣，内部矛盾重重。</p>
+                </div>
+            </div>
+
+            <!-- Role Snapshots -->
+            <div>
+                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">演员阵容</h3>
+                <div class="space-y-3">
+                    
+                    <div class="flex items-start gap-2">
+                        <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-gray-600 text-xs shrink-0"><i class="fa-solid fa-robot"></i></div>
+                        <div>
+                            <div class="text-sm font-bold text-gray-800">Z-9000</div>
+                            <p class="text-xs text-gray-500 line-clamp-2">机器人管家，喜欢讲冷笑话。</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-2">
+                        <div class="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600 text-xs shrink-0"><i class="fa-solid fa-user-astronaut"></i></div>
+                        <div>
+                            <div class="text-sm font-bold text-gray-800">指挥官约翰</div>
+                            <p class="text-xs text-gray-500 line-clamp-2">严肃、负责，压力巨大。</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-2">
+                        <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 text-xs shrink-0"><i class="fa-solid fa-user-tie"></i></div>
+                        <div>
+                            <div class="text-sm font-bold text-gray-800">公司代表</div>
+                            <p class="text-xs text-gray-500 line-clamp-2">唯利是图，只关心预算。</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+             <!-- Params Snapshot -->
+            <div>
+                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">参数记录</h3>
+                <div class="text-xs text-gray-600 space-y-1">
+                    <div class="flex justify-between"><span>总轮数:</span> <span class="font-mono">10</span></div>
+                    <div class="flex justify-between"><span>开始时间:</span> <span class="font-mono">2025-11-28 18:05</span></div>
+                    <div class="flex justify-between"><span>结束时间:</span> <span class="font-mono">2025-11-28 18:30</span></div>
+                </div>
+            </div>
+
+        </aside>
+    </div>
+
+</body>
+</html>
+
